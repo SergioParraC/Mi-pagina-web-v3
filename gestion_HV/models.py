@@ -1,19 +1,8 @@
 from django.db import models
+from gestion_HV import choises
 
 class profesional_education(models.Model):
 
-    TTITLES_STUDIES_CHOICES = [
-        ('CUR','Curso'),
-        ('DIP','Diplomado'),
-        ('BHL','Bachillerato'),
-        ('TEC','Tecnico'),
-        ('TEG','Tecnologo'),
-        ('PRO','Profesional'),
-        ('ESP','Especialización'),
-        ('MAE','Maestria'),
-        ('DOC','Doctorado'),
-        ('POS','Posdoctorado'),
-    ]
     title=models.CharField(max_length=100, verbose_name="Titulo")
     institute=models.CharField(max_length=100, verbose_name="Instituto educativo")
     start_date=models.DateField(verbose_name="Fecha de inicio")
@@ -22,7 +11,9 @@ class profesional_education(models.Model):
     diploma=models.FileField(upload_to='fields/', max_length=100, null=True, blank=True, verbose_name="Adjuntar diploma")
     certificate=models.BooleanField(verbose_name="Está certificado el titulo?")
     description=models.TextField(null=True, blank=True, verbose_name="Descripción del curso")
-    type_estudy=models.CharField(max_length=75, verbose_name="Tipo de estudio", choices=TTITLES_STUDIES_CHOICES)
+    type_estudy=models.CharField(max_length=75, verbose_name="Tipo de estudio", choices=choises.TTITLES_STUDIES_CHOICES)
+    city=models.CharField(max_length=50, verbose_name="Ciudad - municipio")
+
 
     class Meta:
         verbose_name="Estudio profesional"
@@ -64,6 +55,19 @@ class experiencies(models.Model):
     email=models.EmailField(max_length=254, verbose_name="Correo electronico")
     city=models.CharField(max_length=25, verbose_name="Ciudad")
     estudies=models.ManyToManyField(profesional_education, verbose_name="Estudios utilizados") #Relación muchos a muchos entre las experiencias y los estudios realizados
+    position_boss=models.CharField(max_length=25, null=True, blank=True)
+    boss=models.CharField(max_length=75, null=True, blank=True)
+    def get_start_year(self):
+        return self.start_date.year
+
+    def get_start_month(self):
+        return self.start_date.month
+
+    def get_end_year(self):
+        return self.ending_date.year
+
+    def get_end_month(self):
+        return self.ending_date.month 
 
     class Meta:
         verbose_name="Experiencia"
@@ -77,7 +81,7 @@ class languages_programing(models.Model):
     
     name=models.CharField(max_length=50, verbose_name="Nombre")
     date=models.DateField(verbose_name="Fecha")
-    level=models.CharField(max_length=50, verbose_name="Nivel de progreso")
+    level=models.CharField(max_length=50, verbose_name="Nivel de progreso", choices=choises.LEVEL_CHOICES)
     class_icon=models.CharField(max_length=100, verbose_name="Clase del lenguaje o enlace")
     web_page=models.CharField(max_length=75, verbose_name="Pagina Web oficial")
     have_icon=models.BooleanField(verbose_name="Tiene icono?")
@@ -96,11 +100,25 @@ class projects(models.Model):
     start_date=models.DateField(verbose_name="Fecha inicio del proyecto")
     ending_date=models.DateField(null=True, blank=True, verbose_name="Fecha fin del proyecto")
     position=models.ForeignKey(experiencies, on_delete=models.CASCADE, verbose_name="Cargo") #Relación uno a mucjos de los proyectos con una sola experiencia
+    city=models.CharField(max_length=50, verbose_name="Ciudad")
     web_page=models.CharField(max_length=250, null=True, blank=True, verbose_name="Pagina de internet")
     description=models.TextField(verbose_name="Descripción")
+    address=models.CharField(max_length=100, verbose_name="Dirección o ubicación", null=True, blank=True)
     progress=models.CharField(max_length=50, verbose_name="Estado del proyecto")
     company=models.ForeignKey(companies, on_delete=models.CASCADE, verbose_name="Empresa") #Relación uno a muchos de los proyectos con una sola empresa
     tecnologias=models.ManyToManyField(languages_programing)
+
+    def get_start_year(self):
+        return self.start_date.year
+
+    def get_start_month(self):
+        return self.start_date.month
+
+    def get_end_year(self):
+        return self.ending_date.year
+
+    def get_end_month(self):
+        return self.ending_date.month 
 
     class Meta:
         verbose_name="Proyecto"

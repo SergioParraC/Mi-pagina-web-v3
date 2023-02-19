@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mipagweb_v3.views import inicio
+from gestion_HV import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', inicio),
+    path('test/',views.test),
 ]

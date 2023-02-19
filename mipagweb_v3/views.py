@@ -1,75 +1,81 @@
 from django.http import HttpResponse
 from django.template import Template, Context, loader
 from django.shortcuts import render
+from gestion_HV.models import profesional_education, companies, experiencies, languages_programing, projects
 
 class prof_education(object):
 
     def univercity(self):
-        return ["Universidad Católica de Colombia","Colegio Católico de la Sabana"]
+        data=profesional_education.objects.values_list('institute', flat=True).order_by('-start_date').exclude(type_estudy='CUR')
+        return data
     def date(self):
-        return ["Enero 2015 - Abril 2020","Diciembre 2014"]
+        data=profesional_education.objects.values_list('start_date', flat=True).order_by('-start_date').exclude(type_estudy='CUR')
+        return data
     def title(self):
-        return ["Ingeniero Civil","Básico bachillerato"]
+        data=profesional_education.objects.values_list('title', flat=True).order_by('-start_date').exclude(type_estudy='CUR')
+        return data
     def city(self):
-        return ["BOGOTÁ - COLOMBIA","BOGOTÁ - COLOMBIA"]
+        data=profesional_education.objects.values_list('city', flat=True).order_by('-start_date').exclude(type_estudy='CUR')
+        return data
 
 class experience_info(object):
 
     def position(self):
-        return ["Cartógrafo","Dibujante"]
+        return experiencies.objects.values_list('position', flat=True).order_by('-start_date')
     def date(self):
-        return ["Febrero 2019 - Junio 2019","Agosto 2017 - Octubre 2017"]
+        return experiencies.objects.values_list('start_date', flat=True).order_by('-start_date')
     def company(self):
-        return ["Proindesco LTDA","Trabaho independiente"]
+        return experiencies.objects.values_list('company', flat=True).order_by('-start_date')
     def description(self):
-        return ["Análisis de datos geográficos para localizar cuencas, cálculo de sus parametros básicos para el diseño de sistemas de recoleccion de agua potable.","Dibujo de planos hidráulicos, sanitarios y eléctricos para presentación al dueño de la obra."]
+        return experiencies.objects.values_list('description', flat=True).order_by('-start_date')
     def position_boss(self):
-        return ["Ing","Ing"]
+        return experiencies.objects.values_list('position_boss', flat=True).order_by('-start_date')
     def boss(self):
-        return ["Guilermo Hernandez Torrez","Fabián Ancizar Barreto"]
+        return experiencies.objects.values_list('contact', flat=True).order_by('-start_date')
     def cell(self):
-        return [3157274724,3013114723]
+        return experiencies.objects.values_list('contact', flat=True).order_by('-start_date')
     def email(self):
-        return ["ghernandez@ucatolica.edu.co","fabarreto22@ucatolica.edu.co"]
+        return experiencies.objects.values_list('email', flat=True).order_by('-start_date')
 
 class courses_info(object):
 
     def name(self):
-        return ["Curso profesional de Python","Aprende Microsoft Project 2019"]
+        return profesional_education.objects.filter(type_estudy='CUR').values_list('title', flat=True)
     def date(self):
-        return ["Julio 2022","Julio 2022"]
+        return profesional_education.objects.filter(type_estudy='CUR').values_list('start_date', flat=True)
     def institute(self):
-        return ["Códigofacilito","Udemy"]
+        return profesional_education.objects.filter(type_estudy='CUR').values_list('institute', flat=True)
 
 class languages_soft(object):
 
     def name(self):
-        return ["Bootstrap V 4.0","Git","MySQL","php"]
+        return languages_programing.objects.values_list('name', flat=True).order_by('-date')
     def icon_class(self):
-        return ["devicon-bootstrap-plain","devicon-git-plain","devicon-mysql-plain-wordmark","devicon-php-plain"]
+        return languages_programing.objects.values_list('class_icon', flat=True).order_by('-date')
     def date(self):
-        return ["Diciembre 2020","Noviembre 2020","Noviembre 2020","Noviembre 2020"]
+        return languages_programing.objects.values_list('date', flat=True).order_by('-date')
 
-class projects(object):
+class projects_info(object):
     def title(self):
-        return ["DISEÑO DE PAGINA WEB PERSONAL Version 1.0", "TRABAJO DE GRADO"]
+        return projects.objects.values_list('title', flat=True).order_by('-start_date')
     def date(self):
-        return ["Septiembre 2020", "Noviembre 2019"]
+        return projects.objects.values_list('start_date', flat=True).order_by('-start_date')
     def position(self):
-        return ["Sergio Parra - Perfil", "Análisis de oferta hídrica superficial a escala diaria aplicada en cuencas colombianas"]
+        return projects.objects.values_list('position', flat=True).order_by('-start_date')
     def address(self):
-        return ["https://sergioparrac.github.io/Portfolio-V-1.0/","https://sergioparrac.github.io/Portfolio-V-1.0/"]
+        return projects.objects.values_list('start_date', flat=True).order_by('-start_date')
     def description(self):
-        return ["En este aplíco lo que aprendí de estructura con HTML, uso de etiquetas en CSS3, programación en JavaScrip para interaciones dentro de la página y Jquery para llamado de objetos y tratamiento de sus caracteristicas","Trabajo para optar el titulo de Ingeniero civil. En el uso la modelación y el tratamiento de datos para el calculo de escorrentia superficial sobre las cuencas de rio Coello en Ibagué - Tolima y rio Ceibas en Neiva - Huila"]
+        return projects.objects.values_list('description', flat=True).order_by('-start_date')
     def status(self):
-        return ["Culminado", "Culminado"]
+        return projects.objects.values_list('progress', flat=True).order_by('-start_date')
 
 def inicio(request): #Primera vista
+    
     ex_list=experience_info()
     experience=zip(ex_list.position(), ex_list.date(), ex_list.company(), ex_list.description(), ex_list.position_boss(), ex_list.boss(), ex_list.cell(),ex_list.email())
 
-    prof_study=prof_education()
-    profesional_education=zip(prof_study.univercity(), prof_study.date(), prof_study.title(), prof_study.city())
+    prof_study_list=prof_education()
+    prof_ed=zip(prof_study_list.univercity(), prof_study_list.date(), prof_study_list.title(), prof_study_list.city())
 
     courses_list=courses_info()
     courses=zip(courses_list.name(), courses_list.date(), courses_list.institute())
@@ -77,7 +83,9 @@ def inicio(request): #Primera vista
     lang_soft_list=languages_soft()
     languages_software=zip(lang_soft_list.name(), lang_soft_list.icon_class(), lang_soft_list.date())
 
-    proyects_list=projects()
+    proyects_list=projects_info()
     proyects=zip(proyects_list.title(),proyects_list.date(),proyects_list.position(),proyects_list.address(),proyects_list.description(),proyects_list.status())
 
-    return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":profesional_education, "languages_software":languages_software, "proyects":proyects})
+    
+
+    return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":prof_ed, "languages_software":languages_software, "proyects":proyects})
