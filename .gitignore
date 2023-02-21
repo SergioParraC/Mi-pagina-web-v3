@@ -1,2 +1,5 @@
-/mipagweb_v3/__pycache__/
-.pyc
+mipagweb_v3/__pycache__/*.pyc
+gestion_HV/__pycache__/*.pyc
+*.pyc
+/gestion_HV/esquema_db
+db.sqlite3

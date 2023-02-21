@@ -89,7 +89,7 @@
 				</div>
             </div>
             <div class="row">
-                {% for position, date, company, description, position_boss, boss, cell, email in experience %}
+                {% for position, date2, company, description, position_boss, boss, cell, email in experience %}
                     <div class="col-12 col-md-6 mt-3">
                         <div class="card">
                             <div class="card-header">
@@ -99,7 +99,7 @@
                                             <h2>{{position}}</h2>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <small class="text-uppercase">{{date}}</small>
+                                            <small class="text-uppercase">{{date2}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +243,7 @@
         </div>
         <div class="container">
             <div class="row">
-                {% for title, date, position, address, description, status in proyects %}
+                {% for title, date, position, address, description, status, web_page, contact_data in proyects %}
                     <div class="col-12 col-md-6 mt-3">
                         <div class="card">
                             <div class="card-header">
@@ -260,8 +260,10 @@
                             </div>
                             <div class="card-body">
                                 <h3>{{position}}</h3>
-                                <p>Enlace de acceso: <a href="{{address}}">{{address}}</a></p>
+                                <h6>{{address}}</h6>
+                                <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
                                 <p>{{description}}</p>
+                                <p><strong>Contacto:</strong> {{contact_data}} </p>
                                 <p>{{status}}</p>
                             </div>
                         </div>
