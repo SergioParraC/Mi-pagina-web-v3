@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.template import Template, Context, loader
 from django.shortcuts import render
 from gestion_HV.models import profesional_education, companies, experiencies, languages_programing, projects
@@ -169,7 +168,5 @@ def inicio(request): #Primera vista
 
     proyects_list=projects_info()
     proyects=zip(proyects_list.title(),proyects_list.date(),proyects_list.position(),proyects_list.address(),proyects_list.description(),proyects_list.status(),proyects_list.web_page(),proyects_list.contact_data())
-
-    
-
+ 
     return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":prof_ed, "languages_software":languages_software, "proyects":proyects})

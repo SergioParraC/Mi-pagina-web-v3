@@ -1,302 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	{% load static %}
-    <link type='text/css' href="{% static 'styles.css' %}" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <!-- Devicon.dev conexion -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css">
-    <!-- Redes Sociales y otros -->
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-a11y="true"></script>
-    <title>Sergio Parra - Perfil</title>
-</head>
-<bodydata-spy="scroll" data-target="#navbar" data-offset="88">
+{% extends 'body.html' %}
+{% load static %}
 
-    <!-- Inicio de  barra de navegacion -->
-	<nav class="navbar navbar-expand-md navbar-dark navbar-custom sticky-top" id="barra">
-		<div class="container">
-			<a href="#" class="navbar-brand">Sergio Parra</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<i class="fa fa-bars fa-lg py-1 text-white"></i>
-			</button>
-			<div class="navbar-collapse collapse" id="navbar">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="#inicio">Inicio</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#experiencia">Experiencia</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#educacion">Educación</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#intereses">Intereses</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#proyectos">Proyectos</a>
-					</li>
-				</ul>
-				<span class="ml-auto navbar-text">Ingeniero civil - Programador - Diseñador web</span>
-			</div>
-		</div>
-	</nav>
-	<!-- Fin barra de navegacion -->
+{% block title %}Sergio Parra - Inicio{% endblock  %}
 
-	<!-- Inicio del Inicio -->
-	<section id="inicio">
-		<div class="container">
-            <div class="row">
-                <div class="col-12 col-md-5">
-                    <img src="{% static 'images/profile_pag.jpg' %}" alt="profile_pag">
-                </div>
-                <div class="col-12 col-md-7">
-                    <h1 class="display-2">Sergio Steven</h1>
-                    <h1 class="display-3">Parra Cuesta</h1>
-                    <h2>BOGOTÁ - COLOMBIA · (+57) 3203633542 · <a href="#">stevenparracuesta@gmail.com</a></h2>
-                    <p class="lead">Ingeniero Civil profesional con habilidades flexibles, manejo de
-                        software, programador y diseñador web como hobbie</p>
-                    <div class="container"></div>
-                        <div class="row redes-sociales">
-                            <div class="col text-center">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item mr-3"><a href="https://www.facebook.com/parracuesta" id="facebook"><i class="fab fa-facebook-f"></i></a><span class="facebook"> (facebook.com/parracuesta)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://wa.me/qr/GPJUFWYVRQD6J1"><i class="fab fa-whatsapp"></i></a><span class="whatsapp"> (+57 3203633542)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://www.youtube.com/channel/UCi_20At4TxL136OXsXwJcLQ?view_as=subscriber"><i class="fab fa-youtube"></i></a><span class="youtube"> (Sergio Parra)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://www.instagram.com/sergioparracuesta?r=nametag"><i class="fab fa-instagram"></i></a><span class="instagram"> (instagram.com/sergioparracuesta)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://github.com/SergioParraC"><i class="fab fa-github"></i></a><span class="github"> (github.com/SergioParraC)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://www.linkedin.com/in/sergio-steven-parra-c"><i class="fab fa-linkedin-in"></i><span class="linkedin"> 	(linkedin.com/in/sergio-steven-parra-cuesta-26b0031b3)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</section>
+
+{% block content %}
+{% include 'presentation.html' %}
+
+
+
+
 
 <!-- Inicio Experiacia -->
-    <section id="experiencia">
-        <div class="container">
-            <div class="row">
-				<div class="col text-center">
-					<h1 class="display-4">Experiencia</h1>
-				</div>
-            </div>
-            <div class="row">
-                {% for position, date2, company, description, position_boss, boss, cell, email in experience %}
-                    <div class="col-12 col-md-6 mt-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-6 text-left">
-                                            <h2>{{position}}</h2>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <small class="text-uppercase">{{date2}}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h3>{{company}}</h3>
-                                <p>{{description}}</p>
-                                <h3>Contacto:</h3>
-                                <p class="lead">{{position_boss}} {{boss}}</p>
-                                <p><strong>N° teléfono: </strong>(+57) {{cell}}</p>
-                                <p><strong>Correo: </strong><a href="#">{{email}}</a></p>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-
+<section id="experiencia">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1 class="display-4">Experiencia</h1>
             </div>
         </div>
-    </section>
-
-    <!-- Inicio Educación -->
-    <section id="educacion">
-        <div class="container">
-            <div class="row ">
-				<div class="col text-center">
-					<h1 class="display-4">Educación</h1>
-				</div>
-			</div>
-			<div class="row mb-3">
-				<div class="col">
-					<h2>Educación profesional</h2>
-				</div>
-			</div>
-            <div class="row">
-                {% for univercity, date, title, city in prof_study %}
-                    <div class="col-12 col-md-6 mb-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h3>{{univercity}}</h3>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                            <small class="text-uppercase">{{date}}</small>
-                                        </div>
+        <div class="row">
+            {% for position, date2, company, description, position_boss, boss, cell, email in experience %}
+                <div class="col-12 col-md-6 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6 text-left">
+                                        <h2>{{position}}</h2>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <small class="text-uppercase">{{date2}}</small>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <h5>{{title}}</h5>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <small>{{city}}</small>
-                                        </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{company}}</h3>
+                            <p>{{description}}</p>
+                            <h3>Contacto:</h3>
+                            <p class="lead">{{position_boss}} {{boss}}</p>
+                            <p><strong>N° teléfono: </strong>(+57) {{cell}}</p>
+                            <p><strong>Correo: </strong><a href="#">{{email}}</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<!-- Inicio Educación -->
+<section id="educacion">
+    <div class="container">
+        <div class="row ">
+            <div class="col text-center">
+                <h1 class="display-4">Educación</h1>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <h2>Educación profesional</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for univercity, date, title, city in prof_study %}
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h3>{{univercity}}</h3>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                        <small class="text-uppercase">{{date}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h5>{{title}}</h5>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <small>{{city}}</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col">
+                <h2>Estudios formales</h2>
             </div>
+        </div>
+    
+        <div class="row">
+            {% for name, date, institute in courses %}
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h3>{{name}}</h3> 
+                                    </div>
+                                    <div class="col-5 text-right">
+                                        <p class="text-uppercase">{{date}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <p>{{institute}}</p> 
+                                    </div>
+                                    <div class="col-4 text-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
             <div class="row mt-3 mb-3">
                 <div class="col">
-                    <h2>Estudios formales</h2>
+                    <h2>Lenguajes de programación y herramientas</h2>
                 </div>
             </div>
-        
             <div class="row">
-                {% for name, date, institute in courses %}
-                    <div class="col-12 col-md-6 mb-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h3>{{name}}</h3> 
-                                        </div>
-                                        <div class="col-5 text-right">
-                                            <p class="text-uppercase">{{date}}</p>
-                                        </div>
+                {% for name, icon_class, date in languages_software %}
+                    <div class="col-12 col-sm-6 col-lg-3 mb-2">
+                        <div class="container pl-0">
+                        <div class="card ml-2" style="width: 16.5rem;">
+                            <div class="row no-gutters">
+                                <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
+                                    <i class="{{icon_class}}"></i>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="card-body pt-3 pb-3">
+                                        <p>{{name}}</p>
+                                        <small>{{date}}</small>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <p>{{institute}}</p> 
-                                        </div>
-                                        <div class="col-4 text-right">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 {% endfor %}
-
-                <div class="row mt-3 mb-3">
-                    <div class="col">
-                        <h2>Lenguajes de programación y herramientas</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    {% for name, icon_class, date in languages_software %}
-                        <div class="col-12 col-sm-6 col-lg-3 mb-2">
-                            <div class="container pl-0">
-                            <div class="card ml-2" style="width: 16.5rem;">
-                                <div class="row no-gutters">
-                                    <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
-                                        <i class="{{icon_class}}"></i>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="card-body pt-3 pb-3">
-                                            <p>{{name}}</p>
-                                            <small>{{date}}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-<hr>
-    <section id="proyectos">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="display-4">Proyectos</h1>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                {% for title, date, position, address, description, status, web_page, contact_data in proyects %}
-                    <div class="col-12 col-md-6 mt-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-8 text-left">
-                                            <h3>{{title}}</h3>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <small class="text-uppercase">{{date}}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h3>{{position}}</h3>
-                                <h6>{{address}}</h6>
-                                <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
-                                <p>{{description}}</p>
-                                <p><strong>Contacto:</strong> {{contact_data}} </p>
-                                <p>{{status}}</p>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Inicio Footer -->
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <p class="lead">Sergio Steven Parra Cuesta · Ingeniero Civil · Diseñador web · Cartógrafo</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p><a href="https://www.facebook.com/parracuesta">Facebook</a> · 
-                    <a href="https://wa.me/qr/GPJUFWYVRQD6J1">WhatsApp</a> · 
-                    <a href="https://www.youtube.com/channel/UCi_20At4TxL136OXsXwJcLQ?view_as=subscriber">Youtube</a> · 
-                    <a href="https://www.instagram.com/sergioparracuesta?r=nametag">Instagram</a> · 
-                    <a href="https://github.com/SergioParraC">GitHub</a> · 
-                    <a href="https://www.linkedin.com/in/sergio-steven-parra-c">Linkedln</a>
-                </p>
             </div>
         </div>
     </div>
-    <!-- Fin Footer -->
+</section>
+<hr>
+<section id="proyectos">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1 class="display-4">Proyectos</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for title, date, position, address, description, status, web_page, contact_data in proyects %}
+                <div class="col-12 col-md-6 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-8 text-left">
+                                        <h3>{{title}}</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <small class="text-uppercase">{{date}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{position}}</h3>
+                            <h6>{{address}}</h6>
+                            <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
+                            <p>{{description}}</p>
+                            <p><strong>Contacto:</strong> {{contact_data}} </p>
+                            <p>{{status}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
-</bodydata-spy=>
-</html>
+{% endblock %}
