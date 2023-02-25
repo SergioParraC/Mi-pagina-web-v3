@@ -76,6 +76,11 @@ class experience_info(object):
         return experiencies.objects.values_list('phone', flat=True).order_by('-start_date')
     def email(self):
         return experiencies.objects.values_list('email', flat=True).order_by('-start_date')
+    def id_comp(self):
+        return experiencies.objects.values_list('company', flat=True).order_by('-start_date')
+    def id_exp(self):
+        return experiencies.objects.values_list('id', flat=True).order_by('-start_date')
+
 
 class courses_info(object):
 
@@ -155,7 +160,7 @@ class projects_info(object):
 def inicio(request): #Primera vista
     
     ex_list=experience_info()
-    experience=zip(ex_list.position(), ex_list.date2(), ex_list.company(), ex_list.description(), ex_list.position_boss(), ex_list.boss(), ex_list.cell(),ex_list.email())
+    experience=zip(ex_list.position(), ex_list.date2(), ex_list.company(), ex_list.description(), ex_list.position_boss(), ex_list.boss(), ex_list.cell(),ex_list.email(),ex_list.id_comp(),ex_list.id_exp())
 
     prof_study_list=prof_education()
     prof_ed=zip(prof_study_list.univercity(), prof_study_list.date(), prof_study_list.title(), prof_study_list.city())

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import companies, languages_programing
+from .models import companies, languages_programing, experiencies
 from django.http import HttpResponse
 import inflect
 
@@ -58,18 +58,81 @@ class companies_details(object):
     def web_page(self):
         return companies.objects.values_list('web_page', flat=True).order_by('id')
 
-
-def company(request):
+def company_page(request, id_comp):
     comp=companies_details()
+    p = inflect.engine()
+    cap_id=p.number_to_words(id_comp)
+    capital=cap_id.capitalize()
     data=zip(comp.name(), comp.title(), comp.collapse_number(), comp.legal_rep(), comp.city(), comp.addres(), comp.phone(), comp.email(), comp.web_page())
     
-    return render(request, "companies.html",{"data":data})
+    return render(request, "companies.html",{"data":data,"cap_id":capital})
 
-def test(request):
-    id_num=companies.objects.values_list('id', flat=True).order_by('id')
+class experience_details(object):
+    def position(self):
+        return experiencies.objects.values_list('position', flat=True).order_by('-start_date')
+    def id(self):
+        return experiencies.objects.values_list('id', flat=True).order_by('-start_date')
+    def date(self):
+        select_data_month = {"m": """strftime('%%m', start_date)"""}
+        data_start_month = experiencies.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-start_date')
+        select_data_year = {"y": """strftime('%%Y', start_date)"""}
+        data_start_year = experiencies.objects.extra(select=select_data_year).values_list('y', flat=True).order_by('-start_date')
+        select_data_month = {"m": """strftime('%%m', ending_date)"""}
+        data_end_month = experiencies.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-start_date')
+        select_data_year = {"y": """strftime('%%Y', ending_date)"""}
+        data_end_year = experiencies.objects.extra(select=select_data_year).values_list('y', flat=True).order_by('-start_date')
+        data=[]
+        for i in range(len(data_start_month)):
+            j=data_start_month[i]
+            k=data_end_month[i]
+            if data_end_year[i]:
+                data.append(mesesDic[j] + " " + str(data_start_year[i]) + " - " + mesesDic[k] + " " + str(data_end_year[i]))
+            else:
+                data.append(mesesDic[j] + " " + str(data_start_year[i]))
+        return (data)
+    def company(self):
+        data=experiencies.objects.values_list('company', flat=True).order_by('-start_date')
+        data3=[]
+        for i in data:
+            data3.append(companies.objects.get(id=i))
+        return data3
+    def company_id(self):
+        return experiencies.objects.values_list('company', flat=True).order_by('-start_date')
+
+    def description(self):
+        return experiencies.objects.values_list('description', flat=True).order_by('-start_date')
+    
+    def contact(self):
+        name = experiencies.objects.values_list('contact', flat=True).order_by('-start_date')
+        boss_post = experiencies.objects.values_list('position_boss', flat=True).order_by('-start_date')
+        data=[]
+        for i in range(len(name)):
+            data.append(boss_post[i] + " " + name[i])
+        return data
+
+    def phone(self):
+        return experiencies.objects.values_list('phone', flat=True).order_by('-start_date')
+
+    def email(self):
+        return experiencies.objects.values_list('email', flat=True).order_by('-start_date')
+
+    def city(self):
+        return experiencies.objects.values_list('city', flat=True).order_by('-start_date')
+
+
+
+def about(request):
+    return render(request, "about.html")
+
+def experiencies_page(request, id_exp):
+    exp_det=experience_details()
+    data_nav=zip(exp_det.id(),exp_det.position())
+    data=zip(exp_det.id(), exp_det.position(), exp_det.date(), exp_det.company(), exp_det.company_id(), exp_det.description(), exp_det.city(), exp_det.contact(), exp_det.phone(), exp_det.email())
+    return render(request, "experiencie.html",{"data_nav":data_nav,"data":data,"id_activate":id_exp})
+
+def test(request, id_comp):
+    comp=companies_details()
     p = inflect.engine()
-    id_text=[]
-    for i in id_num:
-        capital=p.number_to_words(i)
-        id_text.append(capital.capitalize())
-    return HttpResponse(id_text)
+    cap_id=p.number_to_words(id_comp)
+    capital=cap_id.capitalize()
+    return HttpResponse(capital)

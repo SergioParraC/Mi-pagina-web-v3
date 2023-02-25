@@ -5,60 +5,59 @@
 {% block content %}
 
 <div class="container">
+    <h1 class="display-3 mt-3 mb-3 text-center">Empresas</h1>
     <div class="accordion" id="accordionExample">
         <div class="accordion" id="accordionExample">
 
-          {% for name, title, id_num, legal_rep, city, address, phone, email, web_page in data %}
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <button class="btn btn-secundary btn-block text-left collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{id_num}}" aria-expanded="true" aria-controls="collapse{{id_num}}">
-                    {{name}}
-                  </button>
-                </h2>
-              </div>
-          
-              <div id="collapse{{id_num}}" class="collapse" aria-labelledby="heading{{id_num}}" data-parent="#accordionExample">
-                <div class="card-body">
-                  
-                  <dl class="row">
-                    <dt class="col-sm-4">Campo y área de trabajo</dt>
-                    <dd class="col-sm-8">{{title}} </dd>
-                  
-                    <dt class="col-sm-4">Representante legal</dt>
-                    <dd class="col-sm-8">{{legal_rep}} </dd>
-                  
-                    <dt class="col-sm-4">Ciudad</dt>
-                    <dd class="col-sm-8">{{city}} </dd>
-                  
-                    <dt class="col-sm-4">Dirección de oficinas</dt>
-                    <dd class="col-sm-8">{{address}} </dd>
+            {% for name, title, id_num, legal_rep, city, address, phone, email, web_page in data %}
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-secundary btn-block text-left {% if cap_id != id_num %}collapsed{% endif %} text-white" type="button" data-toggle="collapse" data-target="#collapse{{id_num}}" aria-expanded="{% if cap_id != id_num %}false{% else %}true{% endif %}" aria-controls="collapse{{id_num}}">
+                              {{name}}
+                            </button>
+                        </h2>
+                    </div>
+              
+                    <div id="collapse{{id_num}}" class="collapse {% if cap_id == id_num %}show{% endif %}" aria-labelledby="heading{{id_num}}" data-parent="#accordionExample">
+                        <div class="card-body">
+                          
+                            <dl class="row">
+                                <dt class="col-sm-4">Campo y área de trabajo</dt>
+                                <dd class="col-sm-8">{{title}} </dd>
+                              
+                                <dt class="col-sm-4">Representante legal</dt>
+                                <dd class="col-sm-8">{{legal_rep}} </dd>
+                              
+                                <dt class="col-sm-4">Ciudad</dt>
+                                <dd class="col-sm-8">{{city}} </dd>
+                              
+                                <dt class="col-sm-4">Dirección de oficinas</dt>
+                                <dd class="col-sm-8">{{address}} </dd>
 
-                    <dt class="col-sm-3">Datos de contacto</dt>
-                    <dd class="col-sm-9">
-                      <dl class="row">
-                        <dt class="col-sm-3">Telefono</dt>
-                        <dd class="col-sm-9">{{phone}}</dd>
-                        <dt class="col-sm-3">Correo electrónico</dt>
-                        <dd class="col-sm-9"><a href="mailto:{{email}}">{{email}}</a></dd>
-                        {% if web_page %}
-                          <dt class="col-sm-3">Pagina web</dt>
-                          <dd class="col-sm-9"><a href="{{web_page}}">{{web_page}}</a></dd>
-                        {% endif %}
-                      </dl>
-                    </dd>
+                                <dt class="col-sm-3">Datos de contacto</dt>
+                                <dd class="col-sm-9">
+                                    <dl class="row">
+                                        <dt class="col-sm-3">Telefono</dt>
+                                        <dd class="col-sm-9">(+57) {{phone}}</dd>
+                                        <dt class="col-sm-3">Correo electrónico</dt>
+                                        <dd class="col-sm-9"><a href="mailto:{{email}}">{{email}}</a></dd>
+                                        {% if web_page %}
+                                          <dt class="col-sm-3">Pagina web</dt>
+                                          <dd class="col-sm-9"><a href="{{web_page}}">{{web_page}}</a></dd>
+                                        {% endif %}
+                                    </dl>
+                                </dd>
 
-                  </dl>
+                            </dl>
 
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          {% endfor %}
+            {% endfor %}
 
-        </div>
+          </div>
       </div>
 </div>
-
-
 
 {% endblock %}

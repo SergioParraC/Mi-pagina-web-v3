@@ -20,7 +20,9 @@ from gestion_HV import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('inicio/', inicio),
-    path('companies/',views.company),
-    path('test/',views.test)
+    path('inicio/', inicio, name="index"),
+    path('companies/<int:id_comp>',views.company_page, name='companies'),
+    path('test/<int:id_comp>',views.test),
+    path('acerca-de/', views.about),
+    path('experiencia/<int:id_exp>',views.experiencies_page, name='experiences')
 ]

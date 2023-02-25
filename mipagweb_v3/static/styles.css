@@ -1,3 +1,7 @@
+body {
+    position: relative;
+}}
+
 #inicio img{
     max-width: 100%;
 }

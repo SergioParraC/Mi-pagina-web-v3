@@ -21,7 +21,7 @@
     <!-- Inicio de  barra de navegacion -->
 	<nav class="navbar navbar-expand-md navbar-dark navbar-custom sticky-top" id="barra">
 		<div class="container">
-			<a href="#" class="navbar-brand">Sergio Parra</a>
+			<a href="{% url 'index' %}" class="navbar-brand">Sergio Parra</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="fa fa-bars fa-lg py-1 text-white"></i>
 			</button>
@@ -49,14 +49,14 @@
                         <span class="visually-hidden"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Empresas</a></li>
-                        <li><a class="dropdown-item" href="#">Educación</a></li>
+                        <li><a class="dropdown-item" href="{% url 'companies' '0' %}">Empresas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'experiences' '0' %}">Experiencia</a></li>
                         <li><a class="dropdown-item" href="#">Proyectos</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Acerca de</a></li>
                     </ul>
                 </div>
-				<span class="ml-auto navbar-text">Ingeniero civil - Programador - Diseñador web</span>
+				<span class="ml-auto navbar-text">Ingeniero civil - Programador - Desarrollador web</span>
 			</div>
             
 		</div>
@@ -70,7 +70,7 @@
     <div class="container text-center">
         <div class="row">
             <div class="col">
-                <p class="lead">Sergio Steven Parra Cuesta · Ingeniero Civil · Diseñador web · Cartógrafo</p>
+                <p class="lead">Sergio Steven Parra Cuesta · Ingeniero Civil · Desarrollador web</p>
             </div>
         </div>
         <div class="row">

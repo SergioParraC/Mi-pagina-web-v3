@@ -57,17 +57,6 @@ class experiencies(models.Model):
     estudies=models.ManyToManyField(profesional_education, verbose_name="Estudios utilizados") #Relación muchos a muchos entre las experiencias y los estudios realizados
     position_boss=models.CharField(max_length=25, null=True, blank=True)
     boss=models.CharField(max_length=75, null=True, blank=True)
-    def get_start_year(self):
-        return self.start_date.year
-
-    def get_start_month(self):
-        return self.start_date.month
-
-    def get_end_year(self):
-        return self.ending_date.year
-
-    def get_end_month(self):
-        return self.ending_date.month 
 
     class Meta:
         verbose_name="Experiencia"
@@ -107,18 +96,6 @@ class projects(models.Model):
     progress=models.CharField(max_length=50, verbose_name="Estado del proyecto")
     company=models.ForeignKey(companies, on_delete=models.CASCADE, verbose_name="Empresa") #Relación uno a muchos de los proyectos con una sola empresa
     tecnologias=models.ManyToManyField(languages_programing)
-
-    def get_start_year(self):
-        return self.start_date.year
-
-    def get_start_month(self):
-        return self.start_date.month
-
-    def get_end_year(self):
-        return self.ending_date.year
-
-    def get_end_month(self):
-        return self.ending_date.month 
 
     class Meta:
         verbose_name="Proyecto"

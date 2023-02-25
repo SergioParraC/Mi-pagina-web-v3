@@ -3,15 +3,16 @@
 
 {% block title %}Sergio Parra - Inicio{% endblock  %}
 
-
 {% block content %}
 {% include 'presentation.html' %}
 
-
-
-
-
 <!-- Inicio Experiacia -->
+<script>
+$(document).ready(function() {
+    $("a[rel='tooltip'], .tooltip").tooltip();
+});
+  </script>
+
 <section id="experiencia">
     <div class="container">
         <div class="row">
@@ -19,29 +20,32 @@
                 <h1 class="display-4">Experiencia</h1>
             </div>
         </div>
+        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="Cualquier cosa">
+            Tooltip with HTML
+          </button>
         <div class="row">
-            {% for position, date2, company, description, position_boss, boss, cell, email in experience %}
+            {% for position, date2, company, description, position_boss, boss, cell, email, id_comp, id_exp in experience %}
                 <div class="col-12 col-md-6 mt-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-6 text-left">
-                                        <h2>{{position}}</h2>
+                                    <div class="col-8 text-left">
+                                        <a href="{% url 'experiences' id_exp %}"><h2 class="text-white" rel="tooltip" title="Ir a mas detalles">{{position}}</h2></a>
                                     </div>
-                                    <div class="col-6 text-right">
+                                    <div class="col-4 text-right">
                                         <small class="text-uppercase">{{date2}}</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <h3>{{company}}</h3>
+                            <a href="{% url 'companies' id_comp %}"><h3 rel="tooltip" title="Ir a mas detalles">{{company}}</h3></a>
                             <p>{{description}}</p>
                             <h3>Contacto:</h3>
                             <p class="lead">{{position_boss}} {{boss}}</p>
                             <p><strong>N° teléfono: </strong>(+57) {{cell}}</p>
-                            <p><strong>Correo: </strong><a href="#">{{email}}</a></p>
+                            <p><strong>Correo: </strong><a href="mailto:{{email}}">{{email}}</a></p>
                         </div>
                     </div>
                 </div>
