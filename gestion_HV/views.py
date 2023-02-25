@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import companies, languages_programing, experiencies
+from .models import companies, languages_programing, experiencies, projects
 from django.http import HttpResponse
 import inflect
 
@@ -19,9 +19,6 @@ mesesDic = {
 }
 
 class companies_details(object):
-
-    def name(self):
-        return companies.objects.values_list('name', flat=True).order_by('id')
     
     def title(self):
         sector=companies.objects.values_list('sector', flat=True).order_by('id')
@@ -40,38 +37,11 @@ class companies_details(object):
             id_text.append(capital.capitalize())
         return id_text
 
-    def legal_rep(self):
-        return companies.objects.values_list('legal_rep', flat=True).order_by('id')
-
-    def city(self):
-        return companies.objects.values_list('city', flat=True).order_by('id')
-
-    def addres(self):
-        return companies.objects.values_list('addres', flat=True).order_by('id')
-
-    def phone(self):
-        return companies.objects.values_list('phone', flat=True).order_by('id')
-
-    def email(self):
-        return companies.objects.values_list('email', flat=True).order_by('id')
-
-    def web_page(self):
-        return companies.objects.values_list('web_page', flat=True).order_by('id')
-
-def company_page(request, id_comp):
-    comp=companies_details()
-    p = inflect.engine()
-    cap_id=p.number_to_words(id_comp)
-    capital=cap_id.capitalize()
-    data=zip(comp.name(), comp.title(), comp.collapse_number(), comp.legal_rep(), comp.city(), comp.addres(), comp.phone(), comp.email(), comp.web_page())
-    
-    return render(request, "companies.html",{"data":data,"cap_id":capital})
+    def query_common(self, query):
+        return companies.objects.values_list(query, flat=True).order_by('id')
 
 class experience_details(object):
-    def position(self):
-        return experiencies.objects.values_list('position', flat=True).order_by('-start_date')
-    def id(self):
-        return experiencies.objects.values_list('id', flat=True).order_by('-start_date')
+
     def date(self):
         select_data_month = {"m": """strftime('%%m', start_date)"""}
         data_start_month = experiencies.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-start_date')
@@ -90,18 +60,14 @@ class experience_details(object):
             else:
                 data.append(mesesDic[j] + " " + str(data_start_year[i]))
         return (data)
+
     def company(self):
         data=experiencies.objects.values_list('company', flat=True).order_by('-start_date')
         data3=[]
         for i in data:
             data3.append(companies.objects.get(id=i))
         return data3
-    def company_id(self):
-        return experiencies.objects.values_list('company', flat=True).order_by('-start_date')
-
-    def description(self):
-        return experiencies.objects.values_list('description', flat=True).order_by('-start_date')
-    
+  
     def contact(self):
         name = experiencies.objects.values_list('contact', flat=True).order_by('-start_date')
         boss_post = experiencies.objects.values_list('position_boss', flat=True).order_by('-start_date')
@@ -109,26 +75,77 @@ class experience_details(object):
         for i in range(len(name)):
             data.append(boss_post[i] + " " + name[i])
         return data
+    
+    def query_common(self, query):
+        return experiencies.objects.values_list(query, flat=True).order_by('-start_date')
 
-    def phone(self):
-        return experiencies.objects.values_list('phone', flat=True).order_by('-start_date')
+class projects_details(object):
+    
+    def query_common(self, query):
+        return projects.objects.values_list(query, flat=True).order_by('-start_date')
+    
+    def date(self):
+        select_data_month = {"m": """strftime('%%m', start_date)"""}
+        data_start_month = projects.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-start_date')
+        select_data_year = {"y": """strftime('%%Y', start_date)"""}
+        data_start_year = projects.objects.extra(select=select_data_year).values_list('y', flat=True).order_by('-start_date')
+        select_data_month = {"m": """strftime('%%m', ending_date)"""}
+        data_end_month = projects.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-start_date')
+        select_data_year = {"y": """strftime('%%Y', ending_date)"""}
+        data_end_year = projects.objects.extra(select=select_data_year).values_list('y', flat=True).order_by('-start_date')
+        data=[]
+        for i in range(len(data_start_month)):
+            j=data_start_month[i]
+            k=data_end_month[i]
+            if data_end_year[i]:
+                data.append(mesesDic[j] + " " + str(data_start_year[i]) + " - " + mesesDic[k] + " " + str(data_end_year[i]))
+            else:
+                data.append(mesesDic[j] + " " + str(data_start_year[i]))
+        return (data)
+    
+    def company(self):
+        data=projects.objects.values_list('company', flat=True).order_by('-start_date')
+        data2=[]
+        for i in data:
+            data2.append(companies.objects.get(id=i))
+        return data2
+    
+    def position(self):
+        data=projects.objects.values_list('position', flat=True).order_by('-start_date')
+        data2=[]
+        for i in data:
+            data2.append(experiencies.objects.values_list('position', flat=True).get(id=i))
+        return data2
 
-    def email(self):
-        return experiencies.objects.values_list('email', flat=True).order_by('-start_date')
 
-    def city(self):
-        return experiencies.objects.values_list('city', flat=True).order_by('-start_date')
-
-
+def projects_page(request, id_proj):
+    if id_proj==0:
+        id_proj=1
+    proj=projects_details()
+    data_titles=zip(proj.query_common('id'), proj.query_common('title'))
+    data=zip(proj.query_common('id') , proj.date(), proj.position(), proj.query_common('progress'), proj.query_common('address'), proj.query_common('city'),  proj.query_common('description'),proj.query_common('web_page'), proj.company(), proj.query_common('company'))
+    return render(request, "projects.html", {'data_titles':data_titles, 'data':data, 'id_activate':id_proj})
 
 def about(request):
     return render(request, "about.html")
 
 def experiencies_page(request, id_exp):
+    if id_exp==0:
+        id_exp=1
     exp_det=experience_details()
-    data_nav=zip(exp_det.id(),exp_det.position())
-    data=zip(exp_det.id(), exp_det.position(), exp_det.date(), exp_det.company(), exp_det.company_id(), exp_det.description(), exp_det.city(), exp_det.contact(), exp_det.phone(), exp_det.email())
+    data_nav=zip(exp_det.query_common('id'),exp_det.query_common('position'))
+    data=zip(exp_det.query_common('id'), exp_det.query_common('position'), exp_det.date(), exp_det.company(), exp_det.query_common('company'), exp_det.query_common('description'), exp_det.query_common('city'), exp_det.contact(), exp_det.query_common('phone'), exp_det.query_common('email'))
     return render(request, "experiencie.html",{"data_nav":data_nav,"data":data,"id_activate":id_exp})
+
+def company_page(request, id_comp):
+    if id_comp==0:
+        id_comp=1
+    comp=companies_details()
+    p = inflect.engine()
+    cap_id=p.number_to_words(id_comp)
+    capital=cap_id.capitalize()
+    data=zip(comp.query_common('name'), comp.title(), comp.collapse_number(), comp.query_common('legal_rep'), comp.query_common('city'), comp.query_common('addres'), comp.query_common('phone'), comp.query_common('email'), comp.query_common('web_page'))
+    return render(request, "companies.html",{"data":data,"cap_id":capital})
 
 def test(request, id_comp):
     comp=companies_details()

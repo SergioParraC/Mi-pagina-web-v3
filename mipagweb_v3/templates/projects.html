@@ -1,0 +1,57 @@
+{% extends 'body.html' %}
+
+{% block title %}Experiencia{% endblock  %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-3 mt-3 mb-3 text-center">Proyectos</h1>
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% for id, title in data_titles %}
+                    <a class="nav-link btn-outline-primary mt-2 {% if id == id_activate %}active{% endif %}" id="v-pills-{{id}}-tab" data-toggle="pill" href="#v-pills-{{id}}" role="tab" aria-controls="v-pills-{{id}}" aria-selected="{% if id == id_activate %}True{% else %}False{% endif %}">{{title}}</a>
+                {% endfor %}
+              </div>
+        </div>
+        <div class="col-9">
+          <div class="tab-content" id="v-pills-tabContent">
+            {% for id, date, position, progress, address, city, description, web_page, company, company_id in data %}
+            <div class="tab-pane fade {% if id == id_activate %}show active{% endif %}" id="v-pills-{{id}}" role="tabpanel" aria-labelledby="v-pills-{{id}}-tab"> 
+                <dl class="row">
+                    <dt class="col-sm-3">Tiempo de ejecución</dt>
+                    <dd class="col-sm-9">{{date}}</dd>
+                    
+                    <dt class="col-sm-3">Cargo</dt>
+                    <dd class="col-sm-9">{{position}}</dd>
+
+                    <dt class="col-sm-3">Empresa</dt>
+                    <dd class="col-sm-9">
+                        <a href="{% url 'companies' company_id %}">{{company}}</a>
+                    </dd>
+
+                    <dt class="col-sm-3">Progreso</dt>
+                    <dd class="col-sm-9">{{progress}}.</dd>
+
+                    <dt class="col-sm-3">Ciudad</dt>
+                    <dd class="col-sm-9">{{city}}.</dd>
+
+                    <dt class="col-sm-3">Dirección</dt>
+                    <dd class="col-sm-9">{{address}}.</dd>
+
+                    <dt class="col-sm-3">Descripción</dt>
+                    <dd class="col-sm-9">{{description}}.</dd>
+                    
+                    {% if web_page %}
+                        <dt class="col-sm-3">Pagina web</dt>
+                        <dd class="col-sm-9"><a href="{{web_page}}">{{web_page}}</a></dd>
+                    {% endif %}
+
+
+                  </dl>
+            </div>
+        {% endfor %}
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}
