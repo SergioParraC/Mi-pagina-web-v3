@@ -1,14 +1,14 @@
 TTITLES_STUDIES_CHOICES = [
-    ('CUR','Curso'),
-    ('DIP','Diplomado'),
-    ('BHL','Bachillerato'),
-    ('TEC','Tecnico'),
-    ('TEG','Tecnologo'),
-    ('PRO','Profesional'),
-    ('ESP','Especialización'),
-    ('MAE','Maestria'),
-    ('DOC','Doctorado'),
-    ('POS','Posdoctorado'),
+    ('Curso','Curso'),
+    ('Diplomado','Diplomado'),
+    ('Bachillerato','Bachillerato'),
+    ('Tecnico','Tecnico'),
+    ('Tecnologo','Tecnologo'),
+    ('Profesional','Profesional'),
+    ('Especialización','Especialización'),
+    ('Maestria','Maestria'),
+    ('Doctorado','Doctorado'),
+    ('Posdoctorado','Posdoctorado'),
 ]
 
 LEVEL_CHOICES=[

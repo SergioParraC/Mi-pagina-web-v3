@@ -1,0 +1,65 @@
+{% extends 'body.html' %}
+
+{% block title %}Educación{% endblock  %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-3 mt-3 mb-3 text-center">Educación</h1>
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% for id, title in data_nav %}
+                    <a class="nav-link btn-outline-primary mt-2 {% if id == id_activate %}active{% endif %}" id="v-pills-{{id}}-tab" data-toggle="pill" href="#v-pills-{{id}}" role="tab" aria-controls="v-pills-{{id}}" aria-selected="{% if id == id_activate %}True{% else %}False{% endif %}">{{title}}</a>
+                {% endfor %}
+              </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                {% for id, type_study, institute, city, date, web_page, description, certificate, diploma in data %}
+                    <div class="tab-pane fade {% if id == id_activate %}show active{% endif %}" id="v-pills-{{id}}" role="tabpanel" aria-labelledby="v-pills-{{id}}-tab"> 
+                        <dl class="row">
+                            
+                            <dt class="col-sm-3"><h3>{{type_study}}</h3></dt>
+                            <dd class="col-sm-9"></dd>
+
+                            <dt class="col-sm-3">Intitución educativa</dt>
+                            <dd class="col-sm-9">{{institute}}</dd>
+
+                            <dt class="col-sm-3">Detalles de intitución educativa</dt>
+                            <dd class="col-sm-9">
+                                
+                                <dl class="row">
+                                    <dt class="col-sm-3">Intitución educativa</dt>
+                                    <dd class="col-sm-9">{{institute}}</dd>
+
+                                    <dt class="col-sm-3">Ciudad</dt>
+                                    <dd class="col-sm-9">{{city}}</dd>
+
+                                    <dt class="col-sm-3">Pagina web</dt>
+                                    <dd class="col-sm-9"><a href="{{web_page}}">{{web_page}}</a></dd>
+                                </dl>
+                            </dd>
+                            {% if description %}
+                                <dt class="col-sm-3">Descripción</dt>
+                                <dd class="col-sm-9">{{description}}</dd>
+                            {% endif %}
+                            <dt class="col-sm-3">¿Se encuentra certificado?</dt>
+                            {% if certificate %}
+                                <dd class="col-sm-9">Si</dd>
+                            {% else %}
+                                <dd class="col-sm-9">No</dd>
+                            {% endif %}
+                            
+                            {% if certificate %}
+                                <dt class="col-sm-3">Descargar diploma</dt>
+                                <a href="{{diploma}}">Descargar</a>
+                            {% endif %}
+                            
+                        </dl>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

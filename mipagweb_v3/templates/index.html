@@ -40,7 +40,11 @@ $(document).ready(function() {
                             <a href="{% url 'companies' id_comp %}"><h3 rel="tooltip" title="Ir a mas detalles">{{company}}</h3></a>
                             <p>{{description}}</p>
                             <h3>Contacto:</h3>
-                            <p class="lead">{{position_boss}} {{boss}}</p>
+                            {% if position_boss %}
+                                <p class="lead">{{position_boss}} {{boss}}</p>
+                            {% else %}
+                                <p class="lead">{{boss}}</p>
+                            {% endif %}
                             <p><strong>N° teléfono: </strong>(+57) {{cell}}</p>
                             <p><strong>Correo: </strong><a href="mailto:{{email}}">{{email}}</a></p>
                         </div>
@@ -66,16 +70,18 @@ $(document).ready(function() {
             </div>
         </div>
         <div class="row">
-            {% for univercity, date, title, city in prof_study %}
+            {% for id, univercity, date, title, city in prof_study %}
                 <div class="col-12 col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-7">
-                                        <h3>{{univercity}}</h3>
+                                    <div class="col-9 col-md-9">
+                                        <div class="col-9 col-md-9">
+                                            <a href="{% url 'education' id %}"><h3 class="text-white">{{title}}</h3> </a>
+                                        </div>
                                     </div>
-                                    <div class="col-5 text-right">
+                                    <div class="col-3 col-md-3 text-right">
                                         <small class="text-uppercase">{{date}}</small>
                                     </div>
                                 </div>
@@ -85,7 +91,7 @@ $(document).ready(function() {
                             <div class="container">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h5>{{title}}</h5>
+                                        <h5>{{univercity}}</h5>
                                     </div>
                                     <div class="col-6 text-right">
                                         <small>{{city}}</small>
@@ -105,17 +111,17 @@ $(document).ready(function() {
         </div>
     
         <div class="row">
-            {% for name, date, institute in courses %}
+            {% for id, name, date, institute in courses %}
                 <div class="col-12 col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-7">
-                                        <h3>{{name}}</h3> 
+                                    <div class="col-9 col-md-9">
+                                        <a href="{% url 'education' id %}"><h3 class="text-white">{{name}}</h3> </a>
                                     </div>
-                                    <div class="col-5 text-right">
-                                        <p class="text-uppercase">{{date}}</p>
+                                    <div class="col-3 col-md-3 text-right">
+                                        <small class="text-uppercase">{{date}}</small>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +140,7 @@ $(document).ready(function() {
                     </div>
                 </div>
             {% endfor %}
-
+            <hr>
             <div class="row mt-3 mb-3">
                 <div class="col">
                     <h2>Lenguajes de programación y herramientas</h2>
@@ -142,8 +148,8 @@ $(document).ready(function() {
             </div>
             <div class="row">
                 {% for name, icon_class, date in languages_software %}
-                    <div class="col-12 col-sm-6 col-lg-3 mb-2">
-                        <div class="container pl-0">
+                    <div class="col-12 col-sm-6 col-lg-3 mb-2 mr-2 ml-2">
+                        <div class="container pl-0 mr-2 ml-2">
                         <div class="card ml-2" style="width: 16.5rem;">
                             <div class="row no-gutters">
                                 <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
@@ -193,7 +199,9 @@ $(document).ready(function() {
                         <div class="card-body">
                             <h3>{{position}}</h3>
                             <h6>{{address}}</h6>
+                            {% if web_page %}
                             <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
+                            {% endif %}
                             <p>{{description}}</p>
                             <p><strong>Contacto:</strong> {{contact_data}} </p>
                             <p>{{status}}</p>

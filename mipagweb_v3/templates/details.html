@@ -1,0 +1,60 @@
+{% extends 'body.html' %}
+
+{% block title %}Experiencia{% endblock  %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="display-3 text-center">Detalles</h1>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <h5 class="card-header">Empresas</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Detalles de empresas</h5>
+                  <p class="card-text">Se puede ver el área que abarca la empresa, detalles del representante legar y contacto con la empresa</p>
+                  <a href="{% url 'companies' 0 %}" class="btn btn-primary">Ir a detalles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <h5 class="card-header">Experiencia</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Detalles de la experiencia</h5>
+                  <p class="card-text">Visualiza la fecha en la cual se trabajó en la empresa, una breve descripción de las actividades y datos de contacto con el jefe directo</p>
+                  <a href="{% url 'experiences' 0 %}" class="btn btn-primary">Ir a experiencia</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <h5 class="card-header">Proyectos</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Detalles de proyectos</h5>
+                  <p class="card-text">Caracteristicas de los diferentes proyectos que he ejecutado en mi carrera profesional, con detalles de estos y si es el caso, con una pagina web para saber más del proyecto</p>
+                  <a href="{% url 'projects' 0 %}" class="btn btn-primary">Ir a proyectos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <h5 class="card-header">Educación</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Detalles de educación</h5>
+                  <p class="card-text">Abarca mas especificaciones que los observados en el inicio</p>
+                  <a href="{% url 'education' 0 %}" class="btn btn-primary">Ir a educación</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

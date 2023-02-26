@@ -1,5 +1,5 @@
 {% extends 'body.html' %}
-{% block title %}Acerca de{% endblock  %}
+{% block title %}Experiencia{% endblock  %}
 
 {% block content %}
 
@@ -19,7 +19,7 @@
                     <div class="tab-pane fade {% if id == id_activate %}show active{% endif %}" id="v-pills-{{id}}" role="tabpanel" aria-labelledby="v-pills-{{id}}-tab"> 
                         <dl class="row">
                             <dt class="col-sm-3">Fecha</dt>
-                            <dd class="col-sm-9">{{date}}</dd>
+                            <dd class="col-sm-9 text-lowercase">{{date}}</dd>
                           
                             <dt class="col-sm-3">Empresa</dt>
                             <dd class="col-sm-9">
@@ -27,7 +27,7 @@
                             </dd>
                           
                             <dt class="col-sm-3">Descripción</dt>
-                            <dd class="col-sm-9">{{description}}.</dd>
+                            <dd class="col-sm-9">{{description}}</dd>
                           
                             <dt class="col-sm-3 text-truncate">Ciudad</dt>
                             <dd class="col-sm-9">{{city}}</dd>

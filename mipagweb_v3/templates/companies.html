@@ -1,6 +1,6 @@
 {% extends 'body.html' %}
 
-{% block title %}Experiencia{% endblock  %}
+{% block title %}Empresas{% endblock  %}
 
 {% block content %}
 
@@ -18,22 +18,20 @@
                             </button>
                         </h2>
                     </div>
-              
                     <div id="collapse{{id_num}}" class="collapse {% if cap_id == id_num %}show{% endif %}" aria-labelledby="heading{{id_num}}" data-parent="#accordionExample">
                         <div class="card-body">
-                          
                             <dl class="row">
                                 <dt class="col-sm-4">Campo y área de trabajo</dt>
-                                <dd class="col-sm-8">{{title}} </dd>
+                                <dd class="col-sm-8">{{title}}</dd>
                               
                                 <dt class="col-sm-4">Representante legal</dt>
-                                <dd class="col-sm-8">{{legal_rep}} </dd>
+                                <dd class="col-sm-8">{{legal_rep}}</dd>
                               
                                 <dt class="col-sm-4">Ciudad</dt>
-                                <dd class="col-sm-8">{{city}} </dd>
+                                <dd class="col-sm-8">{{city}}</dd>
                               
                                 <dt class="col-sm-4">Dirección de oficina</dt>
-                                <dd class="col-sm-8">{{address}} </dd>
+                                <dd class="col-sm-8">{{address}}</dd>
 
                                 <dt class="col-sm-3">Datos de contacto</dt>
                                 <dd class="col-sm-9">

@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .models import companies, languages_programing, experiencies, projects
+from .models import companies, languages_programing, experiencies, projects, profesional_education as education
 from django.http import HttpResponse
 import inflect
+from django.db.models import Case, When, Value, IntegerField
+import mimetypes
 
 mesesDic = {
     "01":'ENERO',
@@ -73,7 +75,10 @@ class experience_details(object):
         boss_post = experiencies.objects.values_list('position_boss', flat=True).order_by('-start_date')
         data=[]
         for i in range(len(name)):
-            data.append(boss_post[i] + " " + name[i])
+            if boss_post:
+                data.append(name[i])
+            else:
+                data.append(boss_post[i] + " " + name[i])
         return data
     
     def query_common(self, query):
@@ -117,6 +122,44 @@ class projects_details(object):
             data2.append(experiencies.objects.values_list('position', flat=True).get(id=i))
         return data2
 
+est=Case(
+                When(type_estudy='Curso', then=Value(10)),
+                When(type_estudy='Diplomado', then=Value(9)),
+                When(type_estudy='Bachillerato', then=Value(1)),
+                When(type_estudy='Tecnico', then=Value(2)),
+                When(type_estudy='Tecnologo', then=Value(3)),
+                When(type_estudy='Profesional', then=Value(4)),
+                When(type_estudy='Especialización', then=Value(5)),
+                When(type_estudy='Maestria', then=Value(6)),
+                When(type_estudy='Doctorado', then=Value(7)),
+                When(type_estudy='Posdoctorado', then=Value(8)),
+                output_field=IntegerField())
+
+class education_details(object):
+    
+    def query_common(self, query):
+        
+        q=education.objects.values_list(query, flat=True).annotate(custom_order=est).order_by('start_date', 'custom_order')
+        return q
+
+    def date(self):
+        select_data_month = {"m": """strftime('%%m', start_date)"""}
+        data_start_month = education.objects.extra(select=select_data_month).values_list('m', flat=True).annotate(custom_order=est).order_by('-start_date')
+        select_data_year = {"y": """strftime('%%Y', start_date)"""}
+        data_start_year = education.objects.extra(select=select_data_year).values_list('y', flat=True).annotate(custom_order=est).order_by('-start_date')
+        select_data_month = {"m": """strftime('%%m', ending_date)"""}
+        data_end_month = education.objects.extra(select=select_data_month).values_list('m', flat=True).annotate(custom_order=est).order_by('-start_date')
+        select_data_year = {"y": """strftime('%%Y', ending_date)"""}
+        data_end_year = education.objects.extra(select=select_data_year).values_list('y', flat=True).annotate(custom_order=est).order_by('-start_date')
+        data=[]
+        for i in range(len(data_start_month)):
+            j=data_start_month[i]
+            k=data_end_month[i]
+            if data_end_year[i]:
+                data.append(mesesDic[k] + " " + str(data_end_year[i]))
+            else:
+                data.append(mesesDic[j] + " " + str(data_start_year[i]))
+        return (data)
 
 def projects_page(request, id_proj):
     if id_proj==0:
@@ -146,6 +189,18 @@ def company_page(request, id_comp):
     capital=cap_id.capitalize()
     data=zip(comp.query_common('name'), comp.title(), comp.collapse_number(), comp.query_common('legal_rep'), comp.query_common('city'), comp.query_common('addres'), comp.query_common('phone'), comp.query_common('email'), comp.query_common('web_page'))
     return render(request, "companies.html",{"data":data,"cap_id":capital})
+
+def education_page(request, id_ed):
+    if id_ed==0:
+        id_ed=1
+    edc=education_details()
+    data_nav=zip(edc.query_common('id'),edc.query_common('title'))
+    data=zip(edc.query_common('id'), edc.query_common('type_estudy'), edc.query_common('institute'),  edc.query_common('city'), edc.date(), edc.query_common('web_page'), edc.query_common('description'), edc.query_common('certificate'), edc.query_common('diploma'))
+    #return HttpResponse(data)
+    return render(request, "education.html", {"data_nav":data_nav, "data":data ,"id_activate":id_ed})
+    
+def details_page(request):
+    return render(request, "details.html")
 
 def test(request, id_comp):
     comp=companies_details()
