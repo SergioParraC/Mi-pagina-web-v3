@@ -155,6 +155,6 @@ def inicio(request): #Primera vista
     languages_software=zip(lang_soft_list.query_common('name'), lang_soft_list.query_common('class_icon'), lang_soft_list.date())
 
     proyects_list=projects_info()
-    proyects=zip(proyects_list.query_common('title'),proyects_list.date(),proyects_list.position(),proyects_list.query_common('address'),proyects_list.query_common('description'),proyects_list.query_common('progress'),proyects_list.query_common('web_page'),proyects_list.contact_data())
+    proyects=zip(proyects_list.query_common('id'), proyects_list.query_common('title'),proyects_list.date(),proyects_list.position(),proyects_list.query_common('address'),proyects_list.query_common('description'),proyects_list.query_common('progress'),proyects_list.query_common('web_page'),proyects_list.contact_data())
  
     return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":prof_ed, "languages_software":languages_software, "proyects":proyects})

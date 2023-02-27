@@ -28,19 +28,19 @@
 			<div class="navbar-collapse collapse" id="navbar">
 				<ul class="navbar-nav nav-pills">
 					<li class="nav-item">
-						<a class="nav-link" href="#inicio">Inicio</a>
+						<a class="nav-link" href="{% url 'index' %}#inicio">Inicio</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#experiencia">Experiencia</a>
+						<a class="nav-link" href="{% url 'index' %}#experiencia">Experiencia</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#educacion">Educación</a>
+						<a class="nav-link" href="{% url 'index' %}#educacion">Educación</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#intereses">Intereses</a>
+						<a class="nav-link" href="{% url 'index' %}#intereses">Intereses</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#proyectos">Proyectos</a>
+						<a class="nav-link" href="{% url 'index' %}#proyectos">Proyectos</a>
 					</li>
 				</ul>
                 <div class="btn-group">
@@ -57,7 +57,7 @@
                         <li><a class="dropdown-item" href="{% url 'about' %}">Acerca de</a></li>
                     </ul>
                 </div>
-				<span class="ml-auto navbar-text">Ingeniero civil - Programador - Desarrollador web</span>
+				<span class="ml-auto navbar-text user-select-none d-md-none d-lg-block">Ingeniero civil - Programador - Desarrollador web</span>
 			</div>
             
 		</div>

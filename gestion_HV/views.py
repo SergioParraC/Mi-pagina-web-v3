@@ -201,10 +201,3 @@ def education_page(request, id_ed):
     
 def details_page(request):
     return render(request, "details.html")
-
-def test(request, id_comp):
-    comp=companies_details()
-    p = inflect.engine()
-    cap_id=p.number_to_words(id_comp)
-    capital=cap_id.capitalize()
-    return HttpResponse(capital)

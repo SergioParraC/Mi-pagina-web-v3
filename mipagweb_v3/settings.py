@@ -56,7 +56,7 @@ ROOT_URLCONF = 'mipagweb_v3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/mnt/c/Users/djson/Desktop/Programacion/Proyectos/mipagweb_v3/mipagweb_v3/templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'mipagweb_v3/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

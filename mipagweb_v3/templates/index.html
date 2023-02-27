@@ -21,7 +21,7 @@ $(document).ready(function() {
             </div>
         </div>
         <div class="row">
-            {% for position, date2, company, description, position_boss, boss, cell, email, id_comp, id_exp in experience %}
+            {% for position, date, company, description, position_boss, boss, cell, email, id_comp, id_exp in experience %}
                 <div class="col-12 col-md-6 mt-3">
                     <div class="card">
                         <div class="card-header">
@@ -31,7 +31,7 @@ $(document).ready(function() {
                                         <a href="{% url 'experiences' id_exp %}"><h2 class="text-white" rel="tooltip" title="Ir a mas detalles">{{position}}</h2></a>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <small class="text-uppercase">{{date2}}</small>
+                                        <small class="text-uppercase">{{date}}</small>
                                     </div>
                                 </div>
                             </div>
@@ -148,8 +148,8 @@ $(document).ready(function() {
             </div>
             <div class="row">
                 {% for name, icon_class, date in languages_software %}
-                    <div class="col-12 col-sm-6 col-lg-3 mb-2 mr-2 ml-2">
-                        <div class="container pl-0 mr-2 ml-2">
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-3 pb-3 mr-3 ml-3">
+                        <div class="container pl-0">
                         <div class="card ml-2" style="width: 16.5rem;">
                             <div class="row no-gutters">
                                 <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
@@ -181,14 +181,14 @@ $(document).ready(function() {
     </div>
     <div class="container">
         <div class="row">
-            {% for title, date, position, address, description, status, web_page, contact_data in proyects %}
+            {% for id, title, date, position, address, description, status, web_page, contact_data in proyects %}
                 <div class="col-12 col-md-6 mt-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-8 text-left">
-                                        <h3>{{title}}</h3>
+                                        <a href="{% url 'projects' id %}"><h3 class="text-white">{{title}}</h3></a>
                                     </div>
                                     <div class="col-4 text-right">
                                         <small class="text-uppercase">{{date}}</small>
