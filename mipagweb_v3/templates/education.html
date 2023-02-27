@@ -22,23 +22,24 @@
                             <dt class="col-sm-3"><h3>{{type_study}}</h3></dt>
                             <dd class="col-sm-9"></dd>
 
-                            <dt class="col-sm-3">Intitución educativa</dt>
-                            <dd class="col-sm-9">{{institute}}</dd>
 
                             <dt class="col-sm-3">Detalles de intitución educativa</dt>
                             <dd class="col-sm-9">
                                 
                                 <dl class="row">
-                                    <dt class="col-sm-3">Intitución educativa</dt>
-                                    <dd class="col-sm-9">{{institute}}</dd>
+                                    <dt class="col-sm-5">Intitución educativa</dt>
+                                    <dd class="col-sm-7">{{institute}}</dd>
 
-                                    <dt class="col-sm-3">Ciudad</dt>
-                                    <dd class="col-sm-9">{{city}}</dd>
+                                    <dt class="col-sm-5">Ciudad</dt>
+                                    <dd class="col-sm-7">{{city}}</dd>
 
-                                    <dt class="col-sm-3">Pagina web</dt>
-                                    <dd class="col-sm-9"><a href="{{web_page}}">{{web_page}}</a></dd>
+                                    <dt class="col-sm-5">Pagina web</dt>
+                                    <dd class="col-sm-7"><a href="{{web_page}}">{{web_page}}</a></dd>
                                 </dl>
                             </dd>
+                            <dt class="col-sm-3">Fecha de fin curso</dt>
+                            <dd class="col-sm-9">{{date}}</dd>
+
                             {% if description %}
                                 <dt class="col-sm-3">Descripción</dt>
                                 <dd class="col-sm-9">{{description}}</dd>
@@ -50,9 +51,9 @@
                                 <dd class="col-sm-9">No</dd>
                             {% endif %}
                             
-                            {% if certificate %}
+                            {% if diploma %}
                                 <dt class="col-sm-3">Descargar diploma</dt>
-                                <a href="{{diploma}}">Descargar</a>
+                                <a href="{% url 'download' diploma %}">Descargar</a>
                             {% endif %}
                             
                         </dl>

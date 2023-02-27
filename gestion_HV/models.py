@@ -8,7 +8,7 @@ class profesional_education(models.Model):
     start_date=models.DateField(verbose_name="Fecha de inicio")
     ending_date=models.DateField(null=True, blank=True, verbose_name="Fecha final")
     web_page=models.CharField(max_length=75, verbose_name="Pagina web")
-    diploma=models.FileField(upload_to='fields/', max_length=100, null=True, blank=True, verbose_name="Adjuntar diploma")
+    diploma=models.FileField(upload_to='fields/diploma', max_length=100, null=True, blank=True, verbose_name="Adjuntar diploma")
     certificate=models.BooleanField(verbose_name="Está certificado el titulo?")
     description=models.TextField(null=True, blank=True, verbose_name="Descripción del curso")
     type_estudy=models.CharField(max_length=75, verbose_name="Tipo de estudio", choices=choises.TTITLES_STUDIES_CHOICES)
@@ -56,7 +56,7 @@ class experiencies(models.Model):
     city=models.CharField(max_length=25, verbose_name="Ciudad")
     estudies=models.ManyToManyField(profesional_education, verbose_name="Estudios utilizados") #Relación muchos a muchos entre las experiencias y los estudios realizados
     position_boss=models.CharField(max_length=25, null=True, blank=True)
-    boss=models.CharField(max_length=75, null=True, blank=True)
+    certificate=models.FileField(upload_to='fields/certificate', max_length=100, null=True, blank=True, verbose_name="Adjuntar certificado")
 
     class Meta:
         verbose_name="Experiencia"
@@ -71,9 +71,9 @@ class languages_programing(models.Model):
     name=models.CharField(max_length=50, verbose_name="Nombre")
     date=models.DateField(verbose_name="Fecha")
     level=models.CharField(max_length=50, verbose_name="Nivel de progreso", choices=choises.LEVEL_CHOICES)
-    class_icon=models.CharField(max_length=100, verbose_name="Clase del lenguaje o enlace")
+    class_icon=models.CharField(max_length=200, verbose_name="Clase del lenguaje o enlace")
     web_page=models.CharField(max_length=75, verbose_name="Pagina Web oficial")
-    have_icon=models.BooleanField(verbose_name="Tiene icono?")
+    have_icon=models.CharField(max_length=75, verbose_name="Que tipo de icono?", choices=choises.ICON_CHOISES)
 
     class Meta:
         verbose_name="Lenguaje de programación"

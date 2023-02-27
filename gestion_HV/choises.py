@@ -32,3 +32,8 @@ MONTHS_CHOICES=[
     ('DEC','Diciembre'),
 ]
 
+ICON_CHOISES=[
+    ('dev_icon','Icono en devicon.dev'),
+    ('iconify_icon','Icono en iconify.design'),
+    ('image','Imagen'),
+]

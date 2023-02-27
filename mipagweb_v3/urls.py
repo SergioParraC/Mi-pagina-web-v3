@@ -17,7 +17,7 @@ urlpatterns = [
     ]
 
 urlpatterns += [
-    re_path(r'^educacion/(?P<path>.*)', serve, {
+    re_path(r'^/(?P<path>.*)', serve, {
         'document_root':settings.MEDIA_ROOT,
-    })
+    }, name='download')
 ]

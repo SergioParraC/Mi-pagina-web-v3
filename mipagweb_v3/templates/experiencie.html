@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-9 col-12">
           <div class="tab-content" id="v-pills-tabContent">
-                {% for id, position, date, company, company_id, description, city, contact, phone, email in data %}
+                {% for id, position, date, company, company_id, description, city, contact, phone, email, certificate in data %}
                     <div class="tab-pane fade {% if id == id_activate %}show active{% endif %}" id="v-pills-{{id}}" role="tabpanel" aria-labelledby="v-pills-{{id}}-tab"> 
                         <dl class="row">
                             <dt class="col-sm-3">Fecha</dt>
@@ -43,16 +43,18 @@
                                     <dd class="col-sm-8"><a href="mailto:{{email}}">{{email}}</a></dd>
                                 </dl>
                             </dd>
-                          </dl>
+
+                            {% if certificate %}
+                                <dt class="col-sm-3">Descargar certificado</dt>
+                                <dd><a href="{% url 'download' certificate %}">Descargar</a></dd>
+                            {% endif %}
+                        </dl>
                     </div>
                 {% endfor %}
           </div>
         </div>
-      </div>
-
     </div>
-    
-      
+
 </div>
 
 {% endblock %}

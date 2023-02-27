@@ -147,13 +147,21 @@ $(document).ready(function() {
                 </div>
             </div>
             <div class="row">
-                {% for name, icon_class, date in languages_software %}
+                {% for name, icon_class, date, have_icon in languages_software %}
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-3 pb-3 mr-3 ml-3">
                         <div class="container pl-0">
                         <div class="card ml-2" style="width: 16.5rem;">
                             <div class="row no-gutters">
                                 <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
-                                    <i class="{{icon_class}}"></i>
+                                    {% if have_icon == 'dev_icon' %}
+                                        <i class="{{icon_class}}"></i>
+                                    {% elif have_icon == 'iconify_icon' %}
+                                        <span class="iconify" data-icon="{{icon_class}}" data-inline="false" id="icon"></span>
+                                    {% elif have_icon == 'image' %}
+                                        <img src="{{icon_class}}" alt="AutoDesk Revit" id="image" width="75" height="75">
+                                    {% endif %}
+                                        
+
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="card-body pt-3 pb-3">
@@ -181,7 +189,7 @@ $(document).ready(function() {
     </div>
     <div class="container">
         <div class="row">
-            {% for id, title, date, position, address, description, status, web_page, contact_data in proyects %}
+            {% for id, title, date, position, address, description, status, web_page, contact_data, city in proyects %}
                 <div class="col-12 col-md-6 mt-3">
                     <div class="card">
                         <div class="card-header">
@@ -198,7 +206,7 @@ $(document).ready(function() {
                         </div>
                         <div class="card-body">
                             <h3>{{position}}</h3>
-                            <h6>{{address}}</h6>
+                            <h6>{{address}} - {{city}}</h6>
                             {% if web_page %}
                             <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
                             {% endif %}
@@ -212,5 +220,5 @@ $(document).ready(function() {
         </div>
     </div>
 </section>
-
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 {% endblock %}

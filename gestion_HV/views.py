@@ -177,7 +177,7 @@ def experiencies_page(request, id_exp):
         id_exp=1
     exp_det=experience_details()
     data_nav=zip(exp_det.query_common('id'),exp_det.query_common('position'))
-    data=zip(exp_det.query_common('id'), exp_det.query_common('position'), exp_det.date(), exp_det.company(), exp_det.query_common('company'), exp_det.query_common('description'), exp_det.query_common('city'), exp_det.contact(), exp_det.query_common('phone'), exp_det.query_common('email'))
+    data=zip(exp_det.query_common('id'), exp_det.query_common('position'), exp_det.date(), exp_det.company(), exp_det.query_common('company'), exp_det.query_common('description'), exp_det.query_common('city'), exp_det.contact(), exp_det.query_common('phone'), exp_det.query_common('email'), exp_det.query_common('certificate'))
     return render(request, "experiencie.html",{"data_nav":data_nav,"data":data,"id_activate":id_exp})
 
 def company_page(request, id_comp):

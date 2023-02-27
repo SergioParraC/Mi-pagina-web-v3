@@ -70,7 +70,7 @@ class experience_info(object):
 class courses_info(object):
 
     def query_common(self, query):
-        return profesional_education.objects.filter(Q(type_estudy='Curso')|Q(type_estudy='Diplomado')).values_list(query, flat=True)
+        return profesional_education.objects.filter(Q(type_estudy='Curso')|Q(type_estudy='Diplomado')).values_list(query, flat=True).order_by('-start_date')
     
     def date(self):
         select_data_month = {"m": """strftime('%%m', start_date)"""}
@@ -93,11 +93,11 @@ class languages_soft(object):
         data_month = languages_programing.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-date')
         select_data_year = {"y": """strftime('%%Y', date)"""}
         data_year = languages_programing.objects.extra(select=select_data_year).values_list('y', flat=True).order_by('-date')
-        data5=[]
+        data=[]
         for i in range(len(data_month)):
             j=data_month[i]
-            data5.append(mesesDic[j] + " " + str(data_year[i]))
-        return data5
+            data.append(mesesDic[j] + " " + str(data_year[i]))
+        return data
 
 class projects_info(object):
 
@@ -113,12 +113,15 @@ class projects_info(object):
         data_end_month = projects.objects.extra(select=select_data_month).values_list('m', flat=True).order_by('-start_date')
         select_data_year = {"y": """strftime('%%Y', ending_date)"""}
         data_end_year = projects.objects.extra(select=select_data_year).values_list('y', flat=True).order_by('-start_date')
-        data3=[]
+        data2=[]
         for i in range(len(data_start_month)):
             j=data_start_month[i]
             k=data_end_month[i]
-            data3.append(mesesDic[j] + " " + str(data_start_year[i]) + " - " + mesesDic[k] + " " + str(data_end_year[i]))
-        return (data3)
+            if data_end_year[i]:
+                data2.append(mesesDic[j] + " " + str(data_start_year[i]) + " - " + mesesDic[k] + " " + str(data_end_year[i]))
+            else:
+                data2.append(mesesDic[j] + " " + str(data_start_year[i]))
+        return (data2)
     
     def position(self):
         data=self.query_common('position')
@@ -143,18 +146,18 @@ class projects_info(object):
 def inicio(request): #Primera vista
     
     ex_list=experience_info()
-    experience=zip(ex_list.query_common('position'), ex_list.date(), ex_list.company(), ex_list.query_common('description'), ex_list.query_common('position_boss'), ex_list.query_common('contact'), ex_list.query_common('phone'),ex_list.query_common('email'),ex_list.query_common('company'),ex_list.query_common('id'))
+    experience=zip(ex_list.query_common('position'), ex_list.date(), ex_list.company(), ex_list.query_common('description'), ex_list.query_common('position_boss'), ex_list.query_common('contact'), ex_list.query_common('phone'), ex_list.query_common('email'), ex_list.query_common('company'), ex_list.query_common('id'))
 
     prof_study_list=prof_education()
-    prof_ed=zip(prof_study_list.query_common('id'),prof_study_list.query_common('institute'), prof_study_list.date(), prof_study_list.query_common('title'), prof_study_list.query_common('city'))
+    prof_ed=zip(prof_study_list.query_common('id'), prof_study_list.query_common('institute'), prof_study_list.date(), prof_study_list.query_common('title'), prof_study_list.query_common('city'))
 
     courses_list=courses_info()
-    courses=zip(courses_list.query_common('id'),courses_list.query_common('title'), courses_list.date(), courses_list.query_common('institute'))
+    courses=zip(courses_list.query_common('id'), courses_list.query_common('title'), courses_list.date(), courses_list.query_common('institute'))
 
     lang_soft_list=languages_soft()
-    languages_software=zip(lang_soft_list.query_common('name'), lang_soft_list.query_common('class_icon'), lang_soft_list.date())
+    languages_software=zip(lang_soft_list.query_common('name'), lang_soft_list.query_common('class_icon'), lang_soft_list.date(), lang_soft_list.query_common('have_icon'))
 
     proyects_list=projects_info()
-    proyects=zip(proyects_list.query_common('id'), proyects_list.query_common('title'),proyects_list.date(),proyects_list.position(),proyects_list.query_common('address'),proyects_list.query_common('description'),proyects_list.query_common('progress'),proyects_list.query_common('web_page'),proyects_list.contact_data())
+    proyects=zip(proyects_list.query_common('id'), proyects_list.query_common('title'), proyects_list.date(), proyects_list.position(), proyects_list.query_common('address'), proyects_list.query_common('description'), proyects_list.query_common('progress'), proyects_list.query_common('web_page'), proyects_list.contact_data(), proyects_list.query_common('city'))
  
     return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":prof_ed, "languages_software":languages_software, "proyects":proyects})
