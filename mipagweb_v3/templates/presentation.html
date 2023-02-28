@@ -3,29 +3,44 @@
 	<section id="inicio">
 		<div class="container">
             <div class="row">
-                <div class="col-12 col-md-4">
-                    <img class="img-fluid" src="{% static 'images/profile_pag.jpg' %}" alt="profile_pag">
+                <div class="col-12 col-md-3">
+                    <img class="img-fluid d-print-none" src="{% static 'images/profile_pag.jpg' %}" alt="profile_pag">
+                    <img class="img-fluid d-none d-print-block"  src="{% static 'images/profile_hv.jpg' %}" alt="profile_hv">
                 </div>
-                <div class="col-12 col-md-8">
-                    <h1 class="display-3">Sergio Steven</h1>
-                    <h1 class="display-4">Parra Cuesta</h1>
-                    <h4>BOGOTÁ - COLOMBIA · (+57) 3203633542 
-                    <p><a href="mailto:stevenparracuesta@gmail.com">stevenparracuesta@gmail.com</a></h4></p>
-                    <p class="lead">Ingeniero Civil profesional con habilidades flexibles, manejo de
-                        software, programador y desarrollador web como hobbie</p>
-                    <div class="container"></div>
-                        <div class="row redes-sociales">
-                            <div class="col text-center">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item mr-3"><a href="https://www.facebook.com/parracuesta" id="facebook"><i class="fab fa-facebook-f"></i></a><span class="facebook"> (facebook.com/parracuesta)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://wa.me/qr/GPJUFWYVRQD6J1"><i class="fab fa-whatsapp"></i></a><span class="whatsapp"> (+57 3203633542)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://www.youtube.com/channel/UCi_20At4TxL136OXsXwJcLQ?view_as=subscriber"><i class="fab fa-youtube"></i></a><span class="youtube"> (Sergio Parra)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://www.instagram.com/sergioparracuesta?r=nametag"><i class="fab fa-instagram"></i></a><span class="instagram"> (instagram.com/sergioparracuesta)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://github.com/SergioParraC"><i class="fab fa-github"></i></a><span class="github"> (github.com/SergioParraC)</span></li>
-                                    <li class="list-inline-item mr-3"><a href="https://www.linkedin.com/in/sergio-steven-parra-c"><i class="fab fa-linkedin-in"></i><span class="linkedin"> 	(linkedin.com/in/sergio-steven-parra-cuesta-26b0031b3)</span></a></li>
-                                </ul>
-                            </div>
+                <div class="col-12 col-md-9">
+                    <h1 class="display-4">Sergio Steven</h1>
+                    <h1 class="display-5">Parra Cuesta</h1>
+                    <h4 class="text-uppercase">{{city}} - COLOMBIA · (+57) 3203633542 · <a href="mailto:stevenparracuesta@gmail.com">stevenparracuesta@gmail.com</a></h4>
+                    <div class="d-none d-print-block">
+                        <h4>{{address}}</h4>
+                    </div>
+                    <p>Hola! mi nombre es Sergio Parra, soy ingeniero civil y tengo distintas habilidades en varias
+						ramas de la ingenieria, manejo distintos sorftware de uso común en la ingenieria, tecnologias BIM, 
+						manejo de personal de obra y control de obra.</p>
+                    <p>Soy programador y desarrollador web como hobbie</p>
+
+                    <div class="row redes-sociales d-print-none">
+                        <div class="col text-center">
+                            <ul class="list-inline">
+                                <li class="list-inline-item mr-3"><a href="https://www.facebook.com/parracuesta" id="facebook"><i class="fab fa-facebook-f"></i></a><span class="facebook"> (facebook.com/parracuesta)</span></li>
+                                <li class="list-inline-item mr-3"><a href="https://wa.me/qr/GPJUFWYVRQD6J1"><i class="fab fa-whatsapp"></i></a><span class="whatsapp"> (+57 3203633542)</span></li>
+                                <li class="list-inline-item mr-3"><a href="https://www.youtube.com/channel/UCi_20At4TxL136OXsXwJcLQ?view_as=subscriber"><i class="fab fa-youtube"></i></a><span class="youtube"> (Sergio Parra)</span></li>
+                                <li class="list-inline-item mr-3"><a href="https://www.instagram.com/sergioparracuesta?r=nametag"><i class="fab fa-instagram"></i></a><span class="instagram"> (instagram.com/sergioparracuesta)</span></li>
+                                <li class="list-inline-item mr-3"><a href="https://github.com/SergioParraC"><i class="fab fa-github"></i></a><span class="github"> (github.com/SergioParraC)</span></li>
+                                <li class="list-inline-item mr-3"><a href="https://www.linkedin.com/in/sergio-steven-parra-c"><i class="fab fa-linkedin-in"></i><span class="linkedin">(linkedin.com/in/sergio-steven-parra-cuesta-26b0031b3)</span></a></li>
+                            </ul>
                         </div>
+                    </div>
+
+                    <div class="row d-none d-print-block">
+                        <div class="col">
+                            <i class="fab fa-whatsapp"></i><span style="display: inline;"> (+57 3203633542)</span> · 
+                            <i class="fab fa-github"></i><a href="https://github.com/SergioParraC"><span style="display: inline;"> github.com/SergioParraC</span></a> · 
+                            <i class="fab fa-linkedin-in"></i><a href="www.linkedin.com/in/sergio-parra-c"><span style="display: inline;"> (linkedin.com/in/sergio-parra-c)</span></a> · 
+                            <i class="fab fa-telegram-plane"></i><a href="https://t.me/sergio_parra"><span style="display: inline;"> @sergio_parra</span></a> · <br>
+                            <i class="fas fa-globe"></i><a href="http://sergis16.pythonanywhere.com/"><span style="display: inline;"> sergis16.pythonanywhere.com</span></a>		
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

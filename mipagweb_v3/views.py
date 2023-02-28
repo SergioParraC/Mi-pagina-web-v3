@@ -1,6 +1,6 @@
 from django.template import Template, Context, loader
 from django.shortcuts import render
-from gestion_HV.models import profesional_education, companies, experiencies, languages_programing, projects
+from gestion_HV.models import profesional_education, companies, experiencies, languages_programing, projects, basic_data_change
 from datetime import datetime
 from django.db.models import Q
 
@@ -143,6 +143,11 @@ class projects_info(object):
                 data3.append(j + " - (+57) " + k)
         return data3
 
+class address_info(object):
+
+    def query_common(self, query):
+        return basic_data_change.objects.values_list(query, flat=True).get(id=1)
+
 def inicio(request): #Primera vista
     
     ex_list=experience_info()
@@ -155,9 +160,10 @@ def inicio(request): #Primera vista
     courses=zip(courses_list.query_common('id'), courses_list.query_common('title'), courses_list.date(), courses_list.query_common('institute'))
 
     lang_soft_list=languages_soft()
-    languages_software=zip(lang_soft_list.query_common('name'), lang_soft_list.query_common('class_icon'), lang_soft_list.date(), lang_soft_list.query_common('have_icon'))
+    languages_software=zip(lang_soft_list.query_common('name'), lang_soft_list.query_common('class_icon'), lang_soft_list.date(), lang_soft_list.query_common('have_icon'), lang_soft_list.query_common('level'))
 
     proyects_list=projects_info()
     proyects=zip(proyects_list.query_common('id'), proyects_list.query_common('title'), proyects_list.date(), proyects_list.position(), proyects_list.query_common('address'), proyects_list.query_common('description'), proyects_list.query_common('progress'), proyects_list.query_common('web_page'), proyects_list.contact_data(), proyects_list.query_common('city'))
- 
-    return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":prof_ed, "languages_software":languages_software, "proyects":proyects})
+    
+    add_info=address_info()
+    return render(request, "index.html", {"experience":experience, "courses":courses, "prof_study":prof_ed, "languages_software":languages_software, "proyects":proyects,"address":add_info.query_common('address'), "city":add_info.query_common('city')})

@@ -11,8 +11,7 @@
 $(document).ready(function() {
     $("a[rel='tooltip'], .tooltip").tooltip();
 });
-  </script>
-
+</script>
 <section id="experiencia">
     <div class="container">
         <div class="row">
@@ -25,7 +24,7 @@ $(document).ready(function() {
                 <div class="col-12 col-md-6 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-8 text-left">
                                         <a href="{% url 'experiences' id_exp %}"><h2 class="text-white" rel="tooltip" title="Ir a mas detalles">{{position}}</h2></a>
@@ -74,7 +73,6 @@ $(document).ready(function() {
                 <div class="col-12 col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <div class="container">
                                 <div class="row">
                                     <div class="col-9 col-md-9">
                                         <div class="col-9 col-md-9">
@@ -85,10 +83,9 @@ $(document).ready(function() {
                                         <small class="text-uppercase">{{date}}</small>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-6">
                                         <h5>{{univercity}}</h5>
@@ -103,19 +100,17 @@ $(document).ready(function() {
                 </div>
             {% endfor %}
         </div>
-
         <div class="row mt-3 mb-3">
             <div class="col">
                 <h2>Estudios formales</h2>
             </div>
         </div>
-    
         <div class="row">
             {% for id, name, date, institute in courses %}
                 <div class="col-12 col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-9 col-md-9">
                                         <a href="{% url 'education' id %}"><h3 class="text-white">{{name}}</h3> </a>
@@ -127,7 +122,7 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-8">
                                         <p>{{institute}}</p> 
@@ -140,41 +135,38 @@ $(document).ready(function() {
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="row mt-3 mb-3">
             <hr>
-            <div class="row mt-3 mb-3">
-                <div class="col">
-                    <h2>Lenguajes de programación y herramientas</h2>
-                </div>
+            <div class="col-12">
+                <h2>Lenguajes de programación y herramientas</h2>
             </div>
-            <div class="row">
-                {% for name, icon_class, date, have_icon in languages_software %}
-                    <div class="col-12 col-sm-6 col-lg-3 col-xl-3 pb-3 mr-3 ml-3">
-                        <div class="container pl-0">
-                        <div class="card ml-2" style="width: 16.5rem;">
-                            <div class="row no-gutters">
-                                <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
-                                    {% if have_icon == 'dev_icon' %}
-                                        <i class="{{icon_class}}"></i>
-                                    {% elif have_icon == 'iconify_icon' %}
-                                        <span class="iconify" data-icon="{{icon_class}}" data-inline="false" id="icon"></span>
-                                    {% elif have_icon == 'image' %}
-                                        <img src="{{icon_class}}" alt="AutoDesk Revit" id="image" width="75" height="75">
-                                    {% endif %}
-                                        
-
-                                </div>
-                                <div class="col-sm-8">
-                                    <div class="card-body pt-3 pb-3">
-                                        <p>{{name}}</p>
-                                        <small>{{date}}</small>
-                                    </div>
+        </div>
+        <div class="row">
+            {% for name, icon_class, date, have_icon, level in languages_software %}
+                <div class="col-12 col-sm-4 col-lg-3 col-xl-3 mb-1">
+                    <div class="card ml-2" style="width: 16.5rem;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-4 text-center pt-2" style="background-color: rgba(0, 102, 255, 1);">
+                                {% if have_icon == 'dev_icon' %}
+                                    <i class="{{icon_class}}"></i>
+                                {% elif have_icon == 'iconify_icon' %}
+                                    <span class="iconify" data-icon="{{icon_class}}" data-inline="false" id="icon"></span>
+                                {% elif have_icon == 'image' %}
+                                    <img src="{{icon_class}}" alt="AutoDesk Revit" id="image" width="75" height="75">
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="card-body pt-3 pb-3">
+                                    <samll>{{name}}</samll><br>
+                                    <small>{{level}}</small><br>
+                                    <small>{{date}}</small>
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -193,7 +185,7 @@ $(document).ready(function() {
                 <div class="col-12 col-md-6 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-8 text-left">
                                         <a href="{% url 'projects' id %}"><h3 class="text-white">{{title}}</h3></a>
@@ -205,14 +197,18 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <div class="card-body">
-                            <h3>{{position}}</h3>
-                            <h6>{{address}} - {{city}}</h6>
-                            {% if web_page %}
-                            <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
-                            {% endif %}
-                            <p>{{description}}</p>
-                            <p><strong>Contacto:</strong> {{contact_data}} </p>
-                            <p>{{status}}</p>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <h3>{{position}}</h3>
+                                    <h6>{{address}} - {{city}}</h6>
+                                    {% if web_page %}
+                                    <p>Enlace de acceso: <a href="{{web_page}}">{{web_page}}</a></p>
+                                    {% endif %}
+                                    <p>{{description}}</p>
+                                    <p><strong>Contacto:</strong>{{contact_data}} </p> 
+                                    <br><p>{{status}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,4 +217,18 @@ $(document).ready(function() {
     </div>
 </section>
 <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+<link rel="stylesheet" href="{% static 'style-print.css' %}" media="print">
+<style media="print">
+    @page { -webkit-print-color-adjust: exact;  }
+    a:link { text-decoration:none; } 
+    a:visited { text-decoration:none; }
+    .container{ margin: 0; }
+    .collapse { display: block !important; height: auto !important; }
+    p, a, span { font-size: 14px !important; }
+    small { font-size: 10px; }
+    h1 { font-size: 30px;}
+    h2, h3 {font-size: 18px; }
+    h4, h5, h6 { font-size: 16px;}
+    .footer{ display: none; }
+</style>
 {% endblock %}

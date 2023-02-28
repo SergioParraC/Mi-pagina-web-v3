@@ -5,6 +5,9 @@ body {
 #inicio img{
     max-width: 100%;
 }
+.imgHv{
+    display:none;
+}
 li{
     list-style: none;
 }

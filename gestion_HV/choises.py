@@ -32,8 +32,18 @@ MONTHS_CHOICES=[
     ('DEC','Diciembre'),
 ]
 
-ICON_CHOISES=[
+ICON_CHOICES=[
     ('dev_icon','Icono en devicon.dev'),
     ('iconify_icon','Icono en iconify.design'),
     ('image','Imagen'),
+]
+
+CITY_CHOICES=[
+    ('Bogotá','Bogotá'),
+    ('Tauramena - Casanare','Tauramenta - Casanare')
+]
+
+ADDRESS_CHOICES=[
+    ('Calle 69 Bis # 111 A - 46','Calle 69 Bis # 111 A - 46'),
+    ('Calle 12 # 10 - 15','Calle 12 # 10 - 15')
 ]

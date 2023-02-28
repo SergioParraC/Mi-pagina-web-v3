@@ -55,7 +55,7 @@ class experiencies(models.Model):
     email=models.EmailField(max_length=254, verbose_name="Correo electronico")
     city=models.CharField(max_length=25, verbose_name="Ciudad")
     estudies=models.ManyToManyField(profesional_education, verbose_name="Estudios utilizados") #Relación muchos a muchos entre las experiencias y los estudios realizados
-    position_boss=models.CharField(max_length=25, null=True, blank=True)
+    position_boss=models.CharField(max_length=25, null=True, blank=True, verbose_name="Titulo de jefe")
     certificate=models.FileField(upload_to='fields/certificate', max_length=100, null=True, blank=True, verbose_name="Adjuntar certificado")
 
     class Meta:
@@ -73,7 +73,7 @@ class languages_programing(models.Model):
     level=models.CharField(max_length=50, verbose_name="Nivel de progreso", choices=choises.LEVEL_CHOICES)
     class_icon=models.CharField(max_length=200, verbose_name="Clase del lenguaje o enlace")
     web_page=models.CharField(max_length=75, verbose_name="Pagina Web oficial")
-    have_icon=models.CharField(max_length=75, verbose_name="Que tipo de icono?", choices=choises.ICON_CHOISES)
+    have_icon=models.CharField(max_length=75, verbose_name="Que tipo de icono?", choices=choises.ICON_CHOICES)
 
     class Meta:
         verbose_name="Lenguaje de programación"
@@ -95,7 +95,7 @@ class projects(models.Model):
     address=models.CharField(max_length=100, verbose_name="Dirección o ubicación", null=True, blank=True)
     progress=models.CharField(max_length=50, verbose_name="Estado del proyecto")
     company=models.ForeignKey(companies, on_delete=models.CASCADE, verbose_name="Empresa") #Relación uno a muchos de los proyectos con una sola empresa
-    tecnologias=models.ManyToManyField(languages_programing)
+    tecnologias=models.ManyToManyField(languages_programing, verbose_name="Tecnologias utilizadas")
 
     class Meta:
         verbose_name="Proyecto"
@@ -104,3 +104,7 @@ class projects(models.Model):
 
     def __str__(self):
         return self.title
+
+class basic_data_change(models.Model):
+    city=models.CharField(max_length=75, verbose_name="Ciudad o municipio", choices=choises.CITY_CHOICES)
+    address=models.CharField(max_length=50, verbose_name="Dirección", choices=choises.ADDRESS_CHOICES)

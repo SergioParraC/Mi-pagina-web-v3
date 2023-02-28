@@ -13,3 +13,5 @@ admin.site.register(models.experiencies, views_admin)
 admin.site.register(models.languages_programing)
 
 admin.site.register(models.projects, views_admin)
+
+admin.site.register(models.basic_data_change)
